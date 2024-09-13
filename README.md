@@ -10,7 +10,7 @@ make cluster
 
 This spins up a local 3 node cluster (1 controller, 2 workers) and exposes ports 8200 (vault) and 5432 (postgres) to localhost so you can interact directly with them.  We also mounts the project directory to the cluster so we can mount the directories to the nodes and then into the pods.  Once you get to the app demo you can make modifications or try different things and run without building a new container - just restart the pod.
 
-*** Big Note: Running k3d to spin up the local cluster will also modify the default context for kubectl.  You'll need to change it back by using `config use-context` when you are done.***
+***Big Note: Running k3d to spin up the local cluster will also modify the default context for kubectl.  You'll need to change it back by using `config use-context` when you are done.***
 
 ### Install demo dependencies and demo services.
 
