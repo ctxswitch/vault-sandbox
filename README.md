@@ -151,6 +151,11 @@ spec:
 
 This will allow the application to read the client token which will be used to authenticate the login to vault.  Once logged in you can begin pulling the credentials in.  One of the fields that are returned from the request to get the credentials from the role, is a lease duration that you can use to proactively refresh expiring credentials.  There could be a race between getting the credentials and connecting to the database, so one thing that isn't implemented, that should be as well, would be a check on auth errors during the database connection and if there were errors, refresh the creds.
 
+```shell
+make demo
+kubectl logs pod/demo-app -f
+```
+
 Once you deploy the demo application, you can connect to the log stream and watch it refresh.
 
 ```
@@ -179,7 +184,7 @@ vault policy write app-policy app-policy.hcl
 Then enable the userpass auth method for the `demo-users` path.
 
 ```shell
-ault auth enable -path="demo-users" userpass
+vault auth enable -path="demo-users" userpass
 ```
 
 You can then create users under the path
@@ -200,8 +205,8 @@ again. Future Vault requests will automatically use this token.
 
 Key                    Value
 ---                    -----
-token                  hvs.CAESIInUXgzd8tQCIiOxkoYsO1YlqxLoGHlvLyq4_22tbtIVGh4KHGh2cy5ZT01uSjl4M3lNck9ydzl6NFlGTVJkWmQ
-token_accessor         XyNUgIlf5gPqf23751Jl2bmL
+token                  ...
+token_accessor         ...
 token_duration         768h
 token_renewable        true
 token_policies         ["app-policy" "default"]
