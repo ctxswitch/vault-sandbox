@@ -1,0 +1,22 @@
+apiVersion: k3d.io/v1alpha4
+kind: Simple 
+metadata:
+  name: vault-demo
+servers: 1
+agents: 2
+image: rancher/k3s:v1.28.12-k3s1
+ports:
+  - port: 8200:30020
+    nodeFilters:
+      - server:0
+  - port: 5432:30021
+    nodeFilters:
+      - server:0
+options:
+  k3d:
+    disableLoadbalancer: false
+    disableImageVolume: false
+    disableRollback: false
+  kubeconfig:
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true
