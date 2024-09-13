@@ -10,6 +10,8 @@ make cluster
 
 This spins up a local 3 node cluster (1 controller, 2 workers) and exposes ports 8200 (vault) and 5432 (postgres) to localhost so you can interact directly with them.  We also mounts the project directory to the cluster so we can mount the directories to the nodes and then into the pods.  Once you get to the app demo you can make modifications or try different things and run without building a new container - just restart the pod.
 
+*** Big Note: Running k3d to spin up the local cluster will also modify the default context for kubectl.  You'll need to change it back by using `config use-context` when you are done.***
+
 ### Install demo dependencies and demo services.
 
 From here, you'll `install` vault and an operator to make it simple to manage postgres in this local environment.  The installer will then create a single node postgres deployment and create the nodeports to interact with the services locally without the need to `port-forward` using kubectl.  The `var.sh` file is available for you to load some environment variables that will help you interact easier.
@@ -158,7 +160,7 @@ INFO:__main__:DB Version: ('PostgreSQL 16.4...',)
 
 Note that not only are the passwords changing but you are getting user changes as well.  It's been a while, but I think this is so the older users can linger and handle authentication up to the max ttl that is defined.
 
-## Test user password rotations
+## Test user access to passwords
 
 If you haven't gone through the app portion of the demo, make sure to load the policy:
 
