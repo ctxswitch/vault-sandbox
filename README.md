@@ -37,12 +37,12 @@ vault auth enable kubernetes
 
 export KUBE_ADDR=$(kubectl -n vault exec pod/vault-0 -- echo $KUBERNETES_PORT_443_TCP_ADDR)
 export KUBE_JWT=$(kubectl -n vault exec pod/vault-0 -- cat /var/run/secrets/kubernetes.io/serviceaccount/token)
-export KUBE_CA_CERT=$(kubectl -n vault exec pod/vault-0 -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt)
+kubectl -n vault exec pod/vault-0 -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt > ca.crt
 
 vault write auth/kubernetes/config \
   kubernetes_host=https://$KUBE_ADDR \
   token_reviewer_jwt=$KUBE_JWT \
-  kubernetes_ca_cert=$KUBE_CA_CERT
+  kubernetes_ca_cert=@ca.crt
 ```
 
 In order to interact with postgress we need to enable the database secrets engine and then define roles which we can tie back to specific privileges.
