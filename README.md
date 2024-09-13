@@ -1,5 +1,13 @@
 # vault-sandbox
 
+## Dependencies
+
+* k3d
+* kubectl
+* kustomize
+* psql
+* vault
+
 ## Setup
 
 ### Create the cluster
